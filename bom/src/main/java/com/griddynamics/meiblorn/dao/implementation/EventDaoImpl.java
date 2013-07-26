@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class EventDaoImpl implements IEventDao {
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    @GigaSpaceContext(name = "gigaSpace")
+    @GigaSpaceContext
     private GigaSpace gigaSpace;
 
     public EventDaoImpl() {
@@ -19,26 +19,26 @@ public class EventDaoImpl implements IEventDao {
 
     @Override
     public void put(Event event) {
-        logger.info("Put Event-object");
+        logger.info("EVENT_DAO_LOG: Put Event-object");
         gigaSpace.write(event);
     }
 
     @Override
     public Event get(int eventId) {
-        logger.info("Get Event-object with id: " + eventId);
+        logger.info("EVENT_DAO_LOG: Get Event-object with id: " + eventId);
 
         Event template = new Event();
         template.setId(eventId);
         Event event = gigaSpace.readIfExists(template);
 
-        logger.info("Return Event-object");
+        logger.info("EVENT_DAO_LOG: Return Event-object");
 
         return event;
     }
 
     @Override
     public void remove(int eventId) {
-        logger.info("Remove Event-object with id: " + eventId);
+        logger.info("EVENT_DAO_LOG: Remove Event-object with id: " + eventId);
         Event template = new Event();
         template.setId(eventId);
         gigaSpace.clear(template);

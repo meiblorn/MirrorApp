@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/")
-public class EventObjectContoller {
+public class EventObjectController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public void putEventObject(ModelMap modelMap) {
