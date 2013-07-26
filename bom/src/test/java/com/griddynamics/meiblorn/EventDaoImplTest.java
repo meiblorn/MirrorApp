@@ -6,10 +6,22 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.openspaces.core.GigaSpace;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.naming.Context;
 
 import static org.junit.Assert.*;
 
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration
 public class EventDaoImplTest {
+
+    //@Autowired
+    //GigaSpace gigaSpace;
 
     @Ignore
     @Before @After
@@ -17,7 +29,7 @@ public class EventDaoImplTest {
 
     }
 
-    @Ignore("not ready yet")
+    //@Ignore("not ready yet")
     @Test
     public void processingTest() {
         EventDaoImpl eventDao = new EventDaoImpl();

@@ -40,6 +40,13 @@
     </dependencies>
 
     <build>
+        <!--
+        <testResources>
+            <testResource>
+                <directory>${project.basedir}/src/main/resources/META-INF/spring/*.xml</directory>
+            </testResource>
+        </testResources>
+        -->
         <finalName>MirrorApp-bom</finalName>
         <plugins>
             <plugin>
