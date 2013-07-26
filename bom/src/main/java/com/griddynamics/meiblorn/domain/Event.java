@@ -1,5 +1,9 @@
 package com.griddynamics.meiblorn.domain;
 
+import com.gigaspaces.annotation.pojo.SpaceClass;
+import com.gigaspaces.annotation.pojo.SpaceId;
+
+@SpaceClass
 public class Event {
     private int id;
     private String message;
@@ -13,6 +17,7 @@ public class Event {
         this.message = message;
     }
 
+    @SpaceId
     public int getId() {
         return id;
     }

@@ -1,20 +1,20 @@
-package com.griddynamics.meiblorn.dao.implementation;
+package com.griddynamics.meiblorn.dao;
 
-import com.griddynamics.meiblorn.dao.IEventDao;
 import com.griddynamics.meiblorn.domain.Event;
 import org.openspaces.core.GigaSpace;
+import org.openspaces.core.GigaSpaceConfigurer;
 import org.openspaces.core.context.GigaSpaceContext;
+import org.openspaces.core.space.UrlSpaceConfigurer;
 
 import java.util.logging.Logger;
 
-public class EventDaoImpl implements IEventDao {
+public class EventDaoImpl implements EventDao {
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    @GigaSpaceContext
     private GigaSpace gigaSpace;
 
     public EventDaoImpl() {
-        super();
+        gigaSpace = new GigaSpaceConfigurer(new UrlSpaceConfigurer("/./space")).gigaSpace();
     }
 
     @Override
