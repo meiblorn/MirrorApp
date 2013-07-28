@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"/pu.xml", "/sla.xml"})
+@ContextConfiguration("/pu.xml")
 public class EventDaoImplTest {
 
     @Autowired

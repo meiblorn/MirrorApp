@@ -19,12 +19,5 @@
 
     <build>
         <finalName>MirrorApp-bom</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-openspaces-plugin</artifactId>
-                <version>${gsVersion}</version>
-            </plugin>
-        </plugins>
     </build>
 </project>
