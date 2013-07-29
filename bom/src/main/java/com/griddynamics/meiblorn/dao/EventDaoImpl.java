@@ -6,8 +6,6 @@ import org.openspaces.core.GigaSpace;
 import org.openspaces.core.GigaSpaceConfigurer;
 import org.openspaces.core.space.UrlSpaceConfigurer;
 
-import java.util.logging.Logger;
-
 public class EventDaoImpl implements EventDao {
 
     private GigaSpace gigaSpace;
@@ -24,7 +22,7 @@ public class EventDaoImpl implements EventDao {
     @Override
     public Event get(int eventId) throws NoSuchEventException {
         Event event = gigaSpace.readIfExists(
-                new SQLQuery<Event>(Event.class, String.format("id = %d", eventId)));
+                new SQLQuery<Event>(Event.class, String.format("id = %s", eventId)));
         if (null == event) {
             throw new NoSuchEventException();
         }
@@ -34,7 +32,7 @@ public class EventDaoImpl implements EventDao {
     @Override
     public void remove(int eventId) throws NoSuchEventException {
         Event event = gigaSpace.take(new SQLQuery<Event>(
-                Event.class, String.format("id = %d", eventId)));
+                Event.class, String.format("id = %s", eventId)));
         if (null == event) {
             throw new NoSuchEventException();
         }

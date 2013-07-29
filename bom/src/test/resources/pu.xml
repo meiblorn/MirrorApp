@@ -19,7 +19,4 @@
 
     <os-core:giga-space id="gigaSpace" space="space" tx-manager="TransactionManager"/>
 
-    <!--
-    <os-sla:sla cluster-schema="partitioned-sync2backup" number-of-instances="2" number-of-backups="1" />
-    -->
 </beans>

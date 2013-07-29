@@ -2,6 +2,7 @@ package com.griddynamics.meiblorn;
 
 import com.griddynamics.meiblorn.dao.EventDaoImpl;
 import com.griddynamics.meiblorn.domain.Event;
+import com.j_spaces.core.client.SQLQuery;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -30,14 +31,27 @@ public class EventDaoImplTest {
     }
 
     @Test
+    public void testReadById() {
+        int id = 4;
+        String message = "readById put message";
+        Event localEvent = new Event(id, message);
+        eventDao.put(localEvent);
+        Event recievedEvent = gigaSpace.readById(Event.class, id);
+
+        assertNotNull("No object was processed", recievedEvent);
+        assertEquals("Event id's not equals", localEvent.getId(), recievedEvent.getId());
+        assertEquals("Event messages not equals", localEvent.getMessage(), recievedEvent.getMessage());
+    }
+
+    @Test
     public void testPut() throws Exception {
 
         int id = 1;
         String message = "put message";
         Event localEvent = new Event(id, message);
-
         eventDao.put(localEvent);
-        Event recievedEvent = gigaSpace.readById(Event.class, id);
+        Event recievedEvent = gigaSpace.read(
+                new SQLQuery<Event>(Event.class, "id = " + id));
 
         assertNotNull("No object was processed", recievedEvent);
         assertEquals("Event id's not equals", localEvent.getId(), recievedEvent.getId());
