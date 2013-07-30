@@ -13,12 +13,15 @@
        http://www.openspaces.org/schema/sla http://www.openspaces.org/schema/9.5/sla/openspaces-sla.xsd"
        default-autowire="byType">
 
+    <context:annotation-config />
+    <os-core:giga-space-context />
+
     <os-core:space id="space" url="/./bom-space" />
     <os-core:distributed-tx-manager id="transactionManager"/>
     <os-core:giga-space id="gigaSpace" space="space" clustered="true" tx-manager="transactionManager"/>
 
     <bean id="eventDaoImpl" class="com.griddynamics.meiblorn.dao.EventDaoImpl">
-        <property name="gigaSpace" ref="gigaSpace"/>
+        <property name="gigaSpace" ref="gigaSpace" />
     </bean>
 
 </beans>

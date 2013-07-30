@@ -22,7 +22,8 @@ public class EventDaoImplTest {
     @Autowired
     GigaSpace gigaSpace;
 
-    EventDaoImpl eventDao = new EventDaoImpl();
+    @Autowired
+    EventDaoImpl eventDao;
 
     @Before
     @After

@@ -1,8 +1,9 @@
 package com.griddynamics.meiblorn.controllers;
 
-import com.griddynamics.meiblorn.dao.EventDao;
 import com.griddynamics.meiblorn.dao.EventDaoImpl;
+import com.griddynamics.meiblorn.dao.NoSuchEventException;
 import com.griddynamics.meiblorn.domain.Event;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,13 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.xml.ws.Response;
-
 @Controller
 @RequestMapping(value = "/")
 public class EventObjectController {
 
-    EventDao eventDao = new EventDaoImpl();
+    EventDaoImpl eventDao;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView indexView() {
@@ -32,35 +31,22 @@ public class EventObjectController {
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
-    public ModelAndView getEventObject(@PathVariable int id) {
+    public ModelAndView getEventObject(@PathVariable int id) throws NoSuchEventException {
         ModelAndView modelAndView = new ModelAndView("event");
-        try {
-            Event event = eventDao.get(id);
-            modelAndView.addObject("event", event);
-        } catch (Exception e) {
-
-        }
+        Event event = eventDao.get(id);
+        modelAndView.addObject("event", event);
         return modelAndView;
     }
 
     @RequestMapping(value = "/put", method = RequestMethod.POST)
     public String putEvent(@ModelAttribute("event") Event event) {
         ModelAndView modelAndView = new ModelAndView("event");
-        try {
-            eventDao.put(event);
-        } catch (Exception e) {
-
-        }
+        eventDao.put(event);
         return "redirect:get/" + event.getId();
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
-    public void removeEvent(@ModelAttribute("event") Event event, ModelMap modelMap) {
-        try {
-            eventDao.remove(event.getId());
-        } catch (Exception e) {
-
-        }
+    public void removeEvent(@ModelAttribute("event") Event event, ModelMap modelMap) throws NoSuchEventException {
+        eventDao.remove(event.getId());
     }
-
 }
