@@ -1,9 +1,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>IndexControllerTest</title>
-    <link href="../../resources/styles/style.css" type="text/css" rel="stylesheet">
+    <link href="resources/css/style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div id="wrapper">
@@ -12,18 +13,7 @@
     </div>
 
     <div id="main">
-        <div id="left">
-            <div id="get-event-form">
-                <form:form method="post" action="get" modelAttribute="event">
-                    <div class="form-row">
-                        <div class="row-name">Id:</div>
-                        <div class="row-data"><form:input path="id"/></div>
-                    </div>
-                    <div class="form-submit">
-                        <input type="submit" value="Get event"/>
-                    </div>
-                </form:form>
-            </div>
+
             <div id="put-event-form">
                 <form:form method="post" action="put" modelAttribute="event">
                     <div class="form-row">
