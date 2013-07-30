@@ -3,8 +3,7 @@
 <html>
 <head>
     <title>IndexControllerTest</title>
-    <!-- TODO:CSS FILE -->
-    <link href="../../resources/style.css" type="text/css" rel="stylesheet">
+    <link href="../../resources/styles/style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div id="wrapper">

@@ -14,11 +14,10 @@
        default-autowire="byType">
 
     <bean id="propertiesConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:jdbc.properties"/>
+        <property name="location" value="jdbc.properties"/>
     </bean>
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <!--depends-on="hsqldbServer">-->
         <property name="driverClassName" value="${data-source-driver}"/>
         <property name="url" value="${data-source-url}"/>
         <property name="username" value="${data-source-username}"/>
@@ -30,6 +29,11 @@
         <property name="annotatedClasses">
             <list>
                 <value>com.griddynamics.meiblorn.domain.Event</value>
+            </list>
+        </property>
+        <property name="mappingResources">
+            <list>
+                <value>META-INF/spring/Event.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -50,7 +54,7 @@
     <os-core:space id="mirror" url="/./mirror-service" schema="mirror" external-data-source="hibernateDataSource">
         <os-core:properties>
             <props>
-                <prop key="space-config.mirror-service.cluster.name">mySpace</prop>
+                <prop key="space-config.mirror-service.cluster.name">bom-space</prop>
             </props>
         </os-core:properties>
     </os-core:space>

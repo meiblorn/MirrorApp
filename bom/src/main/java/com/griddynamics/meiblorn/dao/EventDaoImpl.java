@@ -3,10 +3,8 @@ package com.griddynamics.meiblorn.dao;
 import com.griddynamics.meiblorn.domain.Event;
 import com.j_spaces.core.client.SQLQuery;
 import org.openspaces.core.GigaSpace;
-import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 @Component
 public class EventDaoImpl implements EventDao {

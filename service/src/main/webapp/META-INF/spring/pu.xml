@@ -13,6 +13,11 @@
        http://www.openspaces.org/schema/sla http://www.openspaces.org/schema/9.5/sla/openspaces-sla.xsd"
        default-autowire="byType">
 
-    <os-core:space id="space" url="jini://*/*/bom-space" />
-    <os-core:giga-space id="gigaSpace" clustered="true" space="space" />
+    <os-core:space id="space" url="jini://*/*/bom-space"/>
+    <os-core:giga-space id="gigaSpace" clustered="true" space="space"/>
+
+    <bean id="eventDaoImpl" class="com.griddynamics.meiblorn.dao.EventDaoImpl">
+        <property name="gigaSpace" ref="gigaSpace" />
+    </bean>
+
 </beans>

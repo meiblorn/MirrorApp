@@ -17,7 +17,7 @@
     <properties>
         <gsVersion>9.6.0-9500-RELEASE</gsVersion>
         <springVersion>3.1.2.RELEASE</springVersion>
-        <hibernateVersion>3.5.1-Final</hibernateVersion>
+        <hibernateVersion>4.2.3.Final</hibernateVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -32,6 +32,13 @@
             <url>http://repository.jboss.org/maven2/</url>
         </repository>
     </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>org.openspaces</id>
+            <url>http://maven-repository.openspaces.org</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <dependencies>
         <dependency>
