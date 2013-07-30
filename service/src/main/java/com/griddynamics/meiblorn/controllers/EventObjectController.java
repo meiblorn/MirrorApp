@@ -3,7 +3,6 @@ package com.griddynamics.meiblorn.controllers;
 import com.griddynamics.meiblorn.dao.EventDao;
 import com.griddynamics.meiblorn.dao.EventDaoImpl;
 import com.griddynamics.meiblorn.domain.Event;
-import org.openspaces.core.GigaSpace;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,7 +17,6 @@ import javax.xml.ws.Response;
 @RequestMapping(value = "/")
 public class EventObjectController {
 
-    GigaSpace gigaSpace;
     EventDao eventDao = new EventDaoImpl();
 
     @RequestMapping(value = "/", method = RequestMethod.GET)

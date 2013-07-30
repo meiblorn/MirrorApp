@@ -1,0 +1,10 @@
+CREATE database MirrorApp;
+
+CREATE TABLE MirrorApp.Events
+(
+  id INT PRIMARY KEY NOT NULL,
+  message TEXT  NOT NULL
+);
+ALTER TABLE MirrorApp.Events ADD CONSTRAINT unique_id UNIQUE (id);
+
+

@@ -3,15 +3,25 @@ package com.griddynamics.meiblorn.dao;
 import com.griddynamics.meiblorn.domain.Event;
 import com.j_spaces.core.client.SQLQuery;
 import org.openspaces.core.GigaSpace;
-import org.openspaces.core.GigaSpaceConfigurer;
-import org.openspaces.core.space.UrlSpaceConfigurer;
 
 public class EventDaoImpl implements EventDao {
 
     private GigaSpace gigaSpace;
 
     public EventDaoImpl() {
-        gigaSpace = new GigaSpaceConfigurer(new UrlSpaceConfigurer("/./space")).gigaSpace();
+
+    }
+
+    public EventDaoImpl(GigaSpace gigaSpace) {
+        this.gigaSpace = gigaSpace;
+    }
+
+    public GigaSpace getGigaSpace() {
+        return gigaSpace;
+    }
+
+    public void setGigaSpace(GigaSpace gigaSpace) {
+        this.gigaSpace = gigaSpace;
     }
 
     @Override
