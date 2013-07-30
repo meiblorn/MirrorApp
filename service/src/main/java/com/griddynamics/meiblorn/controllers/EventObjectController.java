@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/")
 public class EventObjectController {
 
+    @Autowired
     EventDaoImpl eventDao;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
