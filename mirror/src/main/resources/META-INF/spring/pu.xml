@@ -33,13 +33,12 @@
         </property>
         <property name="mappingResources">
             <list>
-                <value>META-INF/spring/Event.hbm.xml</value>
+                <value>com/griddynamics/meiblorn/domain/Event.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">${hibernate-dialect}</prop>
-                <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
                 <prop key="hibernate.cache.use_second_level_cache">false</prop>
                 <prop key="hibernate.cache.use_query_cache">false</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
@@ -51,10 +50,10 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <os-core:space id="mirror" url="/./mirror-service" schema="mirror" external-data-source="hibernateDataSource">
+    <os-core:space id="mirror" url="jini://*/*/bom-space" schema="mirror" external-data-source="hibernateDataSource">
         <os-core:properties>
             <props>
-                <prop key="space-config.mirror-service.cluster.name">bom-space</prop>
+                <prop key="space-config.mirror-service.cluster.name">mirror-service</prop>
             </props>
         </os-core:properties>
     </os-core:space>
