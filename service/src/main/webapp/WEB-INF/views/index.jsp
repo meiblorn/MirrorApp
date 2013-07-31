@@ -5,49 +5,30 @@
 <head>
     <title>IndexControllerTest</title>
     <link href="resources/css/style.css" type="text/css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js" type="text/javascript"></script>
+    <script src="resources/js/ajax.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="wrapper">
-    <div id="header">
-        Event Actions
-    </div>
-
     <div id="main">
-
-            <div id="put-event-form">
-                <form:form method="post" action="put" modelAttribute="event">
-                    <div class="form-row">
-                        <div class="row-name">Id:</div>
-                        <div class="row-data"><form:input path="id"/></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="row-name">Message:</div>
-                        <div class="row-data"><form:textarea path="message"/></div>
-                    </div>
-                    <div class="form-submit">
-                        <input type="submit" value="Put event"/>
-                    </div>
-                </form:form>
-            </div>
-            <div id="remove-event-form">
-                <form:form method="post" action="remove" modelAttribute="event">
-                    <div class="form-row">
-                        <div class="row-name">Id:</div>
-                        <div class="row-data"><form:input path="id"/></div>
-                    </div>
-                    <div class="form-submit">
-                        <input type="submit" value="Remove event"/>
-                    </div>
-                </form:form>
-            </div>
+        <div id="put-event-block">
+            <form:form id="put-event-form" method="post" action="put" modelAttribute="event">
+                <div class="form-row">
+                    <div class="row-name">Id:</div>
+                    <div class="row-data"><form:input path="id"/></div>
+                </div>
+                <div class="form-row">
+                    <div class="row-name">Message:</div>
+                    <div class="row-data"><form:textarea path="message"/></div>
+                </div>
+                <div class="form-submit">
+                    <input type="button" value="Put event"/>
+                </div>
+            </form:form>
         </div>
-        <div id="right">
+        <div id="events">
 
         </div>
-    </div>
-
-    <div id="footer">
-        Grid Dynamics, 2013.
     </div>
 </div>
 </body>

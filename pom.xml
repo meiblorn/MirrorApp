@@ -18,6 +18,7 @@
         <gsVersion>9.6.0-9500-RELEASE</gsVersion>
         <springVersion>3.1.2.RELEASE</springVersion>
         <hibernateVersion>4.2.3.Final</hibernateVersion>
+        <jacksonVersion>1.9.13</jacksonVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
