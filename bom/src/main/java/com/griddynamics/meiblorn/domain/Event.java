@@ -1,7 +1,7 @@
 package com.griddynamics.meiblorn.domain;
 
 public class Event {
-    private Integer id;
+    private int id;
     private String message;
 
     public Event() {

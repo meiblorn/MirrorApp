@@ -26,9 +26,7 @@
                 </div>
             </form:form>
         </div>
-        <div id="events">
-
-        </div>
+        <div id="events"></div>
     </div>
 </div>
 </body>

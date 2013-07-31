@@ -3,7 +3,6 @@ package com.griddynamics.meiblorn.dao;
 import com.griddynamics.meiblorn.domain.Event;
 import com.j_spaces.core.client.SQLQuery;
 import org.openspaces.core.GigaSpace;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,7 +27,10 @@ public class EventDaoImpl implements EventDao {
     }
 
     @Override
-    public void put(Event event) {
+    public void put(Event event) throws AlreadyInSpaceException {
+        if (null == gigaSpace.readById(Event.class, event.getId())) {
+            throw new AlreadyInSpaceException();
+        }
         gigaSpace.write(event);
     }
 

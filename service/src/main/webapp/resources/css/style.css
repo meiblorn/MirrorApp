@@ -11,7 +11,8 @@ body,html {
 #main {
     outline: 1px #000 solid;
     margin:0 auto;
-    width: 800px;
+    width: 50%;
+    min-width: 600px;
 }
 
 #put-event-block {
@@ -29,7 +30,7 @@ body,html {
 }
 
 #put-event-form textarea {
-    height: 200px;
+    height: 150px;
 }
 
 #events {
@@ -56,15 +57,15 @@ body,html {
 .event-id-header {
     font: 120%/100% Arial, Helvetica, sans-serif;
     text-align: left;
-    width: 100px;
+    margin-right: 160px;
     display: inline-block;
 }
 
 .event-link {
     font: Arial, Helvetica, sans-serif;
     text-align: right;
-    width: 650px;
-    display: inline-block;
+    width: 150px;
+    float: right;
 }
 
 .event-data {

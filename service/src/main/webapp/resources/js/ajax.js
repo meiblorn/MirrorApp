@@ -1,10 +1,11 @@
 $(document).ready(function() {
-    function jsonRequest(url, data, success) {
+    function jsonRequest(url, data, success, error) {
         $.ajax({
             type: "POST",
             url: url,
             data: data ,
-            success: success
+            success: success,
+            error: error
         });
     }
 
@@ -15,14 +16,14 @@ $(document).ready(function() {
                 eventHeaderTmpl.addClass("event-header");
                 var eventHeaderIdTmpl = $("<div>");
                     eventHeaderIdTmpl.addClass("event-id-header");
-                    eventHeaderIdTmpl.text(id);
+                    eventHeaderIdTmpl.text("Event id: " + id);
                     eventHeaderIdTmpl.click(function() {
-                        $(this).next("div .event-data").slideToggle(500)
-                    })
+                        $(this).parent().next("div .event-data").slideToggle(500)
+                    });
                 var eventHeaderLinkTmpl = $("<div>");
                     eventHeaderLinkTmpl.addClass("event-link");
-                    eventHeaderLinkTmpl.append($('<a href="get/'
-                        + id + '">event page&raquo;</a>'));
+                    eventHeaderLinkTmpl.append($('<a href="remove/'
+                        + id + '">| Remove</a>'));
             var eventDataTmpl = $("<div>");
                 eventDataTmpl.addClass("event-data");
                 eventDataTmpl.text(message);
@@ -33,12 +34,16 @@ $(document).ready(function() {
 
         eventTmpl.append(eventHeaderTmpl);
         eventTmpl.append(eventDataTmpl);
-        $("#events").append(template);
+        $("#events").append(eventTmpl);
     }
 
     $("#put-event-form input[type=button]").click(function() {
-        jsonRequest("put", $("#put-event-form").serialize(), function(response) {
-            addEvent(response.id, response.message);
-        });
+        jsonRequest(
+            "put",
+            $("#put-event-form").serialize(),
+            function(response) {
+                addEvent(response.id, response.message);
+            }
+        )
     });
 });
