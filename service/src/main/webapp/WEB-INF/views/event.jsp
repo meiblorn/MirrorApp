@@ -13,9 +13,6 @@
         <div>Event message:</div>
         <div>${event.message}</div>
     </div>
-    <div>
-        <a href="remove/${event.id}">Remove event</a>
-    </div>
 </div>
 </body>
 </html>

@@ -32,7 +32,9 @@
                             Event id: ${event.id}
                         </div>
                         <div class="event-remove-block">
-                            <a href="remove/${event.id}">| Remove</a>
+                            <a href="get/${event.id}">Page</a>
+                            &nbsp;|&nbsp;
+                            <a href="remove/${event.id}">Remove</a>
                         </div>
                     </div>
                     <div class="event-data">
