@@ -13,6 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -72,6 +77,38 @@ public class EventDaoImplTest {
         assertNotNull("No object was processed", recievedEvent);
         assertEquals("Event id's not equals", localEvent.getId(), recievedEvent.getId());
         assertEquals("Event messages not equals", localEvent.getMessage(), recievedEvent.getMessage());
+    }
+
+    @Test
+    public void testGetAll() throws Exception {
+
+        int count = 10;
+        String prefix = "Id: ";
+
+
+
+        List<Event> localEventList = new ArrayList<Event>();
+        for (int i = 0; i < count; i++) {
+            Event event = new Event(i, prefix + i);
+            localEventList.add(event);
+            gigaSpace.write(event);
+        }
+
+        List<Event> recievedEventList = eventDao.getAll();
+        Collections.sort(recievedEventList, new Comparator<Event>() {
+            @Override
+            public int compare(Event o1, Event o2) {
+                return Integer.compare(o1.getId(), o2.getId());
+            }
+        });
+
+        for (int i = 0; i < count; i++) {
+            Event localEvent = localEventList.get(i);
+            Event recievedEvent = recievedEventList.get(i);
+            assertNotNull("No object was processed", recievedEvent);
+            assertEquals("Event id's not equals", localEvent.getId(), recievedEvent.getId());
+            assertEquals("Event messages not equals", localEvent.getMessage(), recievedEvent.getMessage());
+        }
     }
 
     @Test

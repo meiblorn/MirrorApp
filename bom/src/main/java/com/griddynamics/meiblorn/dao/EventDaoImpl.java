@@ -5,6 +5,10 @@ import com.j_spaces.core.client.SQLQuery;
 import org.openspaces.core.GigaSpace;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @Component
 public class EventDaoImpl implements EventDao {
 
@@ -27,10 +31,7 @@ public class EventDaoImpl implements EventDao {
     }
 
     @Override
-    public void put(Event event) throws AlreadyInSpaceException {
-        if (null == gigaSpace.readById(Event.class, event.getId())) {
-            throw new AlreadyInSpaceException();
-        }
+    public void put(Event event) {
         gigaSpace.write(event);
     }
 
@@ -42,6 +43,11 @@ public class EventDaoImpl implements EventDao {
             throw new NoSuchEventException();
         }
         return event;
+    }
+
+    public List<Event> getAll() {
+        Event[] eventArray = gigaSpace.readMultiple(new SQLQuery<Event>(Event.class, "id is NOT null"));
+        return new ArrayList<Event>(Arrays.asList(eventArray));
     }
 
     @Override

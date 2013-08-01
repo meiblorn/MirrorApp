@@ -1,18 +1,16 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>IndexControllerTest</title>
+    <title>Events</title>
     <link href="resources/css/style.css" type="text/css" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-2.0.3.min.js" type="text/javascript"></script>
-    <script src="resources/js/ajax.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="wrapper">
     <div id="main">
         <div id="put-event-block">
-            <form:form id="put-event-form" method="post" action="put" modelAttribute="event">
+            <form:form id="put-event-form" method="post" action="put" modelAttribute="formEvent">
                 <div class="form-row">
                     <div class="row-name">Id:</div>
                     <div class="row-data"><form:input path="id"/></div>
@@ -22,11 +20,27 @@
                     <div class="row-data"><form:textarea path="message"/></div>
                 </div>
                 <div class="form-submit">
-                    <input type="button" value="Put event"/>
+                    <input type="submit" value="Put event"/>
                 </div>
             </form:form>
         </div>
-        <div id="events"></div>
+        <c:forEach var="event" items="${eventList}">
+            <div id="events">
+                <div id="template-event" class="event">
+                    <div class="event-header-block">
+                        <div class="event-id-header">
+                            Event id: ${event.id}
+                        </div>
+                        <div class="event-remove-block">
+                            <a href="remove/${event.id}">| Remove</a>
+                        </div>
+                    </div>
+                    <div class="event-data">
+                        ${event.message}
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
     </div>
 </div>
 </body>

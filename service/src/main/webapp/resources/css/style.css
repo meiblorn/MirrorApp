@@ -37,7 +37,7 @@ body,html {
     border-bottom: 1px #c4c4c4 solid ;
 }
 
-.event-header {
+.event-header-block {
     background: #e9e7e7;
     padding: 7px 15px;
     margin: 0;
@@ -46,11 +46,8 @@ body,html {
     cursor: pointer;
 }
 
-.event-header:hover {
+.event-header-block:hover {
     background-color: #e3e2e2;
-}
-
-.event-header.active {
     background-position: right 5px;
 }
 
@@ -61,7 +58,7 @@ body,html {
     display: inline-block;
 }
 
-.event-link {
+.event-remove-block {
     font: Arial, Helvetica, sans-serif;
     text-align: right;
     width: 150px;

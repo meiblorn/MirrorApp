@@ -3,6 +3,7 @@
         "http://www.gigaspaces.com/dtd/7_1/gigaspaces-metadata.dtd">
 <gigaspaces-mapping>
     <class name="com.griddynamics.meiblorn.domain.Event" persist="true" replicate="true" fifo-support="true">
+        <property name="id" null-value="-1" />
         <id name="id" auto-generate="false" />
         <routing name="id" />
     </class>
