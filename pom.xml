@@ -15,9 +15,9 @@
     <name>MirrorApp</name>
 
     <properties>
-        <gsVersion>9.6.0-9500-RELEASE</gsVersion>
-        <springVersion>3.1.2.RELEASE</springVersion>
-        <hibernateVersion>4.2.3.Final</hibernateVersion>
+        <gsVersion>9.0.2</gsVersion>
+        <springVersion>3.1.1.RELEASE</springVersion>
+        <hibernateVersion>3.6.10.Final</hibernateVersion>
         <jacksonVersion>1.9.13</jacksonVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -55,6 +55,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>${jacksonVersion}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${springVersion}</version>
@@ -78,8 +83,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.6</source>
+                    <target>1.6</target>
                 </configuration>
             </plugin>
 

@@ -1,65 +1,50 @@
 package com.griddynamics.meiblorn.controllers;
 
-import com.griddynamics.meiblorn.dao.EventDaoImpl;
+import com.griddynamics.meiblorn.dao.impl.EventDaoImpl;
 import com.griddynamics.meiblorn.dao.NoSuchEventException;
 import com.griddynamics.meiblorn.domain.Event;
+import com.griddynamics.meiblorn.domain.Events;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value = "operation", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EventObjectController {
-
     @Autowired
-    EventDaoImpl eventDao;
+    private EventDaoImpl eventDao;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView indexView() {
-        ModelAndView modelAndView = new ModelAndView("index");
-
-        List<Event> eventList = eventDao.getAll();
-
-        modelAndView.addObject("formEvent", new Event());
-        modelAndView.addObject("eventList", eventList);
-
-        return modelAndView;
+    @RequestMapping(value = "/event", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public Events retrieveAll() {
+        return new Events(eventDao.getAll());
     }
 
-    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
-    public ModelAndView getEventObject(@PathVariable int id) throws NoSuchEventException {
-        ModelAndView modelAndView = new ModelAndView("event");
-        Event event = eventDao.get(id);
-        modelAndView.addObject("event", event);
-        return modelAndView;
+    @RequestMapping(value = "/event/{id}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public Event getEventObject(@PathVariable int id) throws NoSuchEventException {
+            return eventDao.get(id);
     }
 
-    @RequestMapping(value = "/put", method = RequestMethod.POST)
-    public String putEvent(@ModelAttribute("formEvent") Event event, HttpServletRequest httpServletRequest) {
+    @RequestMapping(value = "/event", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public Event putEvent(@RequestBody Event event) {
         eventDao.put(event);
-        return "redirect:" + httpServletRequest.getHeader("Referer");
+        return event;
     }
 
-    @RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
-    public String removeEvent(@PathVariable int id, HttpServletRequest httpServletRequest) throws NoSuchEventException {
+    @RequestMapping(value = "/event/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public Integer removeEvent(@PathVariable int id) throws NoSuchEventException {
         eventDao.remove(id);
-        return "redirect:" + httpServletRequest.getHeader("Referer");
-    }
-
-    @ExceptionHandler(NoSuchEventException.class)
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    public String exceptionHandler(HttpServletRequest httpServletRequest,
-                                   HttpServletResponse httpServletResponse) throws IOException {
-        httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
-        return "redirect:" + httpServletRequest.getHeader("Referer");
+        return id;
     }
 }

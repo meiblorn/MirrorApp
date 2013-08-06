@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE gigaspaces-mapping PUBLIC "-//GIGASPACES//DTD GS//EN"
-        "http://www.gigaspaces.com/dtd/7_1/gigaspaces-metadata.dtd">
+        "http://www.gigaspaces.com/dtd/9_0/gigaspaces-metadata.dtd">
 <gigaspaces-mapping>
-    <class name="com.griddynamics.meiblorn.domain.Event" persist="true" replicate="true" fifo-support="true">
-        <property name="id" null-value="-1" />
+    <class name="com.griddynamics.meiblorn.domain.Event"
+           replicate="true"
+           inherit-indexes="true"
+           include-properties="EXPLICIT">
+        <property name="message" index="NONE" />
         <id name="id" auto-generate="false" />
         <routing name="id" />
     </class>

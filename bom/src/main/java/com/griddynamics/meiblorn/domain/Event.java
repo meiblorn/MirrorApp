@@ -1,6 +1,8 @@
 package com.griddynamics.meiblorn.domain;
 
-public class Event {
+import java.io.Serializable;
+
+public class Event implements Serializable {
     private int id;
     private String message;
 

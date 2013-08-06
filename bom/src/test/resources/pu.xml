@@ -20,7 +20,7 @@
     <os-core:distributed-tx-manager id="transactionManager"/>
     <os-core:giga-space id="gigaSpace" space="space" clustered="true" tx-manager="transactionManager"/>
 
-    <bean id="eventDaoImpl" class="com.griddynamics.meiblorn.dao.EventDaoImpl">
+    <bean id="eventDaoImpl" class="com.griddynamics.meiblorn.dao.impl.EventDaoImpl">
         <property name="gigaSpace" ref="gigaSpace" />
     </bean>
 
