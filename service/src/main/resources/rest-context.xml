@@ -7,8 +7,8 @@
 
     <context:annotation-config />
     <context:component-scan base-package="com.griddynamics.factories" />
-    <context:component-scan base-package="com.griddynamics.meiblorn.controllers" />
-    <context:component-scan base-package="com.griddynamics.meiblorn.dao.impl" />
+    <context:component-scan base-package="com.griddynamics.controllers" />
+    <context:component-scan base-package="com.griddynamics.dao.impl" />
 
     <bean id="viewNameTranslator"
           class="org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator" />

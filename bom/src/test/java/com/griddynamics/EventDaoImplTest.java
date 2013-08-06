@@ -1,20 +1,4 @@
-package com.griddynamics.meiblorn;
-
-import com.griddynamics.meiblorn.dao.impl.EventDaoImpl;
-import com.griddynamics.meiblorn.domain.Event;
-import com.j_spaces.core.client.SQLQuery;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.openspaces.core.GigaSpace;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import static org.junit.Assert.*;
+package com.griddynamics;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration("/pu.xml")

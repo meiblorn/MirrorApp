@@ -13,10 +13,16 @@
        http://www.openspaces.org/schema/sla http://www.openspaces.org/schema/9.5/sla/openspaces-sla.xsd"
        default-autowire="byType">
 
+    <!--
+
+    -->
     <bean id="propertiesConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="jdbc.properties"/>
     </bean>
 
+    <!--
+
+    -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${data-source-driver}"/>
         <property name="url" value="${data-source-url}"/>
@@ -24,16 +30,14 @@
         <property name="password" value="${data-source-password}"/>
     </bean>
 
+    <!--
+
+    -->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="annotatedClasses">
-            <list>
-                <value>com.griddynamics.meiblorn.domain.Event</value>
-            </list>
-        </property>
         <property name="mappingResources">
             <list>
-                <value>com/griddynamics/meiblorn/domain/Event.hbm.xml</value>
+                <value>Event.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -46,6 +50,9 @@
         </property>
     </bean>
 
+    <!--
+
+    -->
     <bean id="hibernateDataSource" class="org.openspaces.persistency.hibernate.DefaultHibernateExternalDataSource">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>

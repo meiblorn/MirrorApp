@@ -1,4 +1,4 @@
-package com.griddynamics.meiblorn.dao;
+package com.griddynamics.dao;
 
 import org.openspaces.core.GigaSpace;
 

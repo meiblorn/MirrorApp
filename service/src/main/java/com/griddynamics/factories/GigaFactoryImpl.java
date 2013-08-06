@@ -1,6 +1,6 @@
 package com.griddynamics.factories;
 
-import com.griddynamics.meiblorn.dao.GigaFactory;
+import com.griddynamics.dao.GigaFactory;
 import org.openspaces.core.GigaSpace;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.ServletContextAware;
@@ -18,6 +18,11 @@ import javax.servlet.ServletContext;
 public class GigaFactoryImpl implements GigaFactory, ServletContextAware {
     private GigaSpace gigaSpace;
     private ServletContext servletContext;
+
+    /**
+     * TODO:Complete
+     * @return
+     */
     @Override
     public GigaSpace getGigaSpace() {
         if (gigaSpace == null) {
@@ -26,6 +31,10 @@ public class GigaFactoryImpl implements GigaFactory, ServletContextAware {
         return gigaSpace;
     }
 
+    /**
+     * TODO:Completes
+     * @param servletContext
+     */
     @Override
     public void setServletContext(ServletContext servletContext) {
         this.servletContext = servletContext;

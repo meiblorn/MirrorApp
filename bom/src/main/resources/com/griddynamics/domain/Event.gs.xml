@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE gigaspaces-mapping PUBLIC "-//GIGASPACES//DTD GS//EN"
         "http://www.gigaspaces.com/dtd/9_0/gigaspaces-metadata.dtd">
+        <!--TODO: Add comments -->
 <gigaspaces-mapping>
-    <class name="com.griddynamics.meiblorn.domain.Event"
+    <class name="com.griddynamics.domain.Event"
            replicate="true"
            inherit-indexes="true"
            include-properties="EXPLICIT">
