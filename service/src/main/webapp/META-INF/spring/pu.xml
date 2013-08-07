@@ -11,7 +11,8 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!--
-
+        http://wiki.gigaspaces.com/wiki/display/XAP9/Transaction+Management
+        http://static.springsource.org/spring/docs/2.5.x/reference/transaction.html#transaction-declarative
     -->
     <os-core:local-tx-manager id="transactionManager" space="space"/>
 

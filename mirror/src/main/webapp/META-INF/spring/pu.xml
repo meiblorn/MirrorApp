@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:os-core="http://www.openspaces.org/schema/core"
-       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:task="http://www.springframework.org/schema/task"
-       xmlns:os-sla="http://www.openspaces.org/schema/sla"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.openspaces.org/schema/core http://www.openspaces.org/schema/9.0/core/openspaces-core.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
-       http://www.openspaces.org/schema/sla http://www.openspaces.org/schema/9.5/sla/openspaces-sla.xsd"
-       default-autowire="byType">
+       http://www.openspaces.org/schema/core http://www.openspaces.org/schema/9.0/core/openspaces-core.xsd">
 
     <!--
         PropertyPlaceholderConfigurer resolves placeholders in bean property values of context definitions.
@@ -19,7 +12,7 @@
         The default placeholder syntax: ${...}
     -->
     <bean id="propertiesConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="jdbc.properties"/>
+        <property name="location" value="classpath:jdbc.properties"/>
     </bean>
 
     <!--
@@ -68,12 +61,6 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <os-core:space id="mirror" url="jini://*/*/bom-space" schema="mirror" external-data-source="hibernateDataSource">
-        <os-core:properties>
-            <props>
-                <prop key="space-config.mirror-service.cluster.name">mirror-service</prop>
-            </props>
-        </os-core:properties>
-    </os-core:space>
+    <os-core:space id="mirror" url="jini://*/*/event" schema="mirror" external-data-source="hibernateDataSource" />
 
 </beans>
