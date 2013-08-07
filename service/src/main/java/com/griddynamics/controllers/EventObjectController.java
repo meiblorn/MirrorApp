@@ -11,7 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * TODO:Complete
+ *
+ * Spring MVC REST Controller class that provides access to GigaSpace throw EventDao Interface.
+ *
+ * URL: /operation
+ *
+ * @since 1.0
  */
 @Controller
 @RequestMapping(value = "operation", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -20,8 +25,12 @@ public class EventObjectController {
     private EventDaoImpl eventDao;
 
     /**
-     * TODO:Complete
-     * @return
+     * Retrieves all <tt>Event</tt> objects from the <tt>GigaSpace</tt> space.
+     *
+     * Methods; GET
+     * URL: /event
+     *
+     * @return {@link Events} instance
      */
     @RequestMapping(value = "/event", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
@@ -31,9 +40,13 @@ public class EventObjectController {
     }
 
     /**
-     * TODO:Complete
-     * @param id
-     * @return
+     * Retrieves the <tt>Event</tt> instance with specified identification number from the <tt>GigaSpace</tt> space.
+     *
+     * Methods; GET
+     * URL: /event/{id}
+     *
+     * @param id the <tt>Event</tt> object identifier.
+     * @return the <tt>Event</tt> instance;
      * @throws NoSuchEventException
      */
     @RequestMapping(value = "/event/{id}", method = RequestMethod.GET)
@@ -44,9 +57,14 @@ public class EventObjectController {
     }
 
     /**
-     * TODO:Complete
-     * @param event
-     * @return
+     * Inserts the <tt>Event</tt> object into the <tt>GigaSpace</tt> space
+     *
+     * Methods; POST
+     * URL: /event/
+     * Media types: application/json
+     *
+     * @param event the <tt>Event</tt> instance;
+     * @return the <tt>Event</tt> instance;
      */
     @RequestMapping(value = "/event", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
@@ -57,9 +75,13 @@ public class EventObjectController {
     }
 
     /**
-     * TODO:Complete
-     * @param id
-     * @return
+     * Removes the <tt>Event</tt> instance with specified identification number from the <tt>GigaSpace</tt> space.
+     *
+     * Methods; DELETE
+     * URL: /event/{id}
+     *
+     * @param id the <tt>Event</tt> object identifier.
+     * @return the <tt>Event</tt> object identifier.
      * @throws NoSuchEventException
      */
     @RequestMapping(value = "/event/{id}", method = RequestMethod.DELETE)

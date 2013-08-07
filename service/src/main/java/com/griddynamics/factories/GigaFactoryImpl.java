@@ -9,11 +9,13 @@ import javax.servlet.ServletContext;
 import java.util.logging.Logger;
 
 /**
- * GigaSpace factory implementation.
+ * {@link GigaFactory} interface implementation. Provides <tt>GigaSpace</tt> instance throw servlet context.
  *
  * @author Alex Rodin
  *         Date: 8/1/13
  *         Time: 6:03 PM
+ *
+ * @since 1.0
  */
 @Component
 public class GigaFactoryImpl implements GigaFactory, ServletContextAware {
@@ -22,22 +24,22 @@ public class GigaFactoryImpl implements GigaFactory, ServletContextAware {
     private ServletContext servletContext;
 
     /**
-     * TODO:Complete
-     * @return
+     * Returns the <tt>GigaSpace</tt> instance.
+     *
+     * @return <tt>GigaSpace</tt> instance.
      */
     @Override
     public GigaSpace getGigaSpace() {
         if (gigaSpace == null) {
-            logger.info("-----> getGigaSpace()");
             gigaSpace = (GigaSpace) servletContext.getAttribute("gigaSpace");
-            logger.info("-----> gigaSpace: " + gigaSpace.toString());
         }
         return gigaSpace;
     }
 
     /**
-     * TODO:Completes
-     * @param servletContext
+     * Sets the servlet context.
+     *
+     * @param servletContext the servlet context
      */
     @Override
     public void setServletContext(ServletContext servletContext) {

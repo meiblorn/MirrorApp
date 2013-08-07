@@ -14,14 +14,16 @@
        default-autowire="byType">
 
     <!--
-
+        PropertyPlaceholderConfigurer resolves placeholders in bean property values of context definitions.
+        It pulls values from a properties file into bean definitions.
+        The default placeholder syntax: ${...}
     -->
     <bean id="propertiesConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="jdbc.properties"/>
     </bean>
 
     <!--
-
+        A factory for connections to the physical data source.
     -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${data-source-driver}"/>
@@ -31,15 +33,24 @@
     </bean>
 
     <!--
-
+        Factory bean that creates a Hibernate SessionFactory, which makes Session instances.
+        Session - main interface between Java and Hibernate. Its provides a lot of operations
+        for instances of mapped entity classes. For example, save() and persist() operations result in an SQL INSERT,
+        delete() in an SQL DELETE and update() or merge() in an SQL UPDATE.
     -->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+
+        <!-- Connection to the physical data source -->
         <property name="dataSource" ref="dataSource"/>
+
+        <!--Mapping *.hbm.xml documents -->
         <property name="mappingResources">
             <list>
                 <value>Event.hbm.xml</value>
             </list>
         </property>
+
+        <!-- Factory property that imitates hibernate.cfg file -->
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">${hibernate-dialect}</prop>
@@ -51,7 +62,7 @@
     </bean>
 
     <!--
-
+        Data source configuration for Hibernate.
     -->
     <bean id="hibernateDataSource" class="org.openspaces.persistency.hibernate.DefaultHibernateExternalDataSource">
         <property name="sessionFactory" ref="sessionFactory"/>

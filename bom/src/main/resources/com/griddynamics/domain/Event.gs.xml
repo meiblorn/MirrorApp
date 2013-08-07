@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE gigaspaces-mapping PUBLIC "-//GIGASPACES//DTD GS//EN"
         "http://www.gigaspaces.com/dtd/9_0/gigaspaces-metadata.dtd">
-        <!--TODO: Add comments -->
+
+<!--
+    XML Metadata mapping for GigaSpaces POJO classes.
+-->
 <gigaspaces-mapping>
+
+    <!--
+        Mapping for com.griddynamics.domain.Event class.
+        Objects can be replicated when using "replicated" space topology.
+        TODO: Complete doc
+    -->
     <class name="com.griddynamics.domain.Event"
            replicate="true"
            inherit-indexes="true"
            include-properties="EXPLICIT">
+
+        <!-- Message property mapping -->
         <property name="message" index="NONE" />
+
+        <!-- Object space id -->
         <id name="id" auto-generate="false" />
+
+        <!-- Method name for routing operation -->
         <routing name="id" />
     </class>
 </gigaspaces-mapping>

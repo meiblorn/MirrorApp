@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * An implementation of {@link EventDao} interface, that provides interact mechanism with <tt>GigaSpace</tt>  interface using {@link Event} domain objects.
+ *
  * @since 1.0
  */
 @Component
@@ -23,7 +24,8 @@ public class EventDaoImpl implements EventDao {
     private GigaFactory gigaFactory;
 
     /**
-     * Inserts the {@link Event} object into the <tt>GigaSpace</tt>'s instance space.
+     * Inserts the {@link Event} object into the <tt>GigaSpace</tt> instance space.
+     *
      * @param event the <tt>Event</tt> instance.
      */
     @Override
@@ -33,10 +35,11 @@ public class EventDaoImpl implements EventDao {
     }
 
     /**
-     * Returns the <tt>Event</tt> object from the <tt>GigaSpace</tt>'s instance space with specified numeric identifier.
-     * @param eventId the <tt>Event</tt> instance numeric identifier.
-     * @return the <tt>Event</tt> object with specified numeric identifier.
-     * @throws NoSuchEventException if there aren't in the <tt>GigaSpace</tt>'s instance space <tt>Event</tt> object with specified identifier.
+     * Returns the <tt>Event</tt> instance from the <tt>GigaSpace</tt>'s instance space with specified numeric identifier.
+     *
+     * @param eventId the <tt>Event</tt> object identifier.
+     * @return the <tt>Event</tt> instance.
+     * @throws NoSuchEventException if there aren't in the <tt>GigaSpace</tt> instance space <tt>Event</tt> object with specified identifier.
      */
     @Override
     @Transactional(readOnly = true)
@@ -47,8 +50,9 @@ public class EventDaoImpl implements EventDao {
     }
 
     /**
-     * TODO: Complete
-     * @return
+     * Returns all <tt>Event</tt> objects from the <tt>GigaSpace</tt> instance space.
+     *
+     * @return the <tt>Event</tt> objects list.
      */
     @Transactional(readOnly = true)
     public List<Event> getAll() {
@@ -57,9 +61,10 @@ public class EventDaoImpl implements EventDao {
     }
 
     /**
-     * Removes the <tt>Event</tt> object with specified numeric identifier.
-     * @param eventId the <tt>Event</tt> instance numeric identifier.
-     * @throws NoSuchEventException if there aren't in the <tt>GigaSpace</tt>'s instance space <tt>Event</tt> object with specified identifier.
+     * Removes the <tt>Event</tt> instance with specified numeric identifier.
+     *
+     * @param eventId the <tt>Event</tt> object identifier.
+     * @throws NoSuchEventException if in the <tt>GigaSpace</tt> instance space there aren't <tt>Event</tt> object with specified identifier.
      */
     @Override
     @Transactional

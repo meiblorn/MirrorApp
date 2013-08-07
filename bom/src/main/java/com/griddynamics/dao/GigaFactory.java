@@ -3,17 +3,19 @@ package com.griddynamics.dao;
 import org.openspaces.core.GigaSpace;
 
 /**
- * Factory to provide GigaSpace instance.
+ * Factory interface, that provides GigaSpace instance.
  *
  * @author Alex Rodin
  *         Date: 8/1/13
  *         Time: 5:58 PM
+ *
+ * @since 1.0
  */
 public interface GigaFactory {
     /**
-     * Returns GigaSpace instance.
+     * Returns <tt>GigaSpace</tt> instance.
      *
-     * @return GigaSpace instance.
+     * @return <tt>GigaSpace</tt> instance.
      */
     GigaSpace getGigaSpace();
 }
