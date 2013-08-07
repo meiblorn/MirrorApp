@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.ServletContextAware;
 
 import javax.servlet.ServletContext;
+import java.util.logging.Logger;
 
 /**
  * GigaSpace factory implementation.
@@ -16,6 +17,7 @@ import javax.servlet.ServletContext;
  */
 @Component
 public class GigaFactoryImpl implements GigaFactory, ServletContextAware {
+    Logger logger = Logger.getLogger(this.getClass().getName());
     private GigaSpace gigaSpace;
     private ServletContext servletContext;
 
@@ -26,7 +28,9 @@ public class GigaFactoryImpl implements GigaFactory, ServletContextAware {
     @Override
     public GigaSpace getGigaSpace() {
         if (gigaSpace == null) {
+            logger.info("-----> getGigaSpace()");
             gigaSpace = (GigaSpace) servletContext.getAttribute("gigaSpace");
+            logger.info("-----> gigaSpace: " + gigaSpace.toString());
         }
         return gigaSpace;
     }
