@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-    TODO: All docs
--->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:os-core="http://www.openspaces.org/schema/core"
@@ -10,9 +7,46 @@
        http://www.openspaces.org/schema/core http://www.openspaces.org/schema/9.0/core/openspaces-core.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <bean id="propertiesConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:jdbc.properties"/>
+    </bean>
+
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${data-source-driver}"/>
+        <property name="url" value="${data-source-url}"/>
+        <property name="username" value="${data-source-username}"/>
+        <property name="password" value="${data-source-password}"/>
+    </bean>
+
     <!--
-        http://wiki.gigaspaces.com/wiki/display/XAP9/Transaction+Management
-        http://static.springsource.org/spring/docs/2.5.x/reference/transaction.html#transaction-declarative
+        Factory bean that creates a Hibernate SessionFactory, which makes Session instances.
+        Session - main interface between Java and Hibernate. Its provides a lot of operations
+        for instances of mapped entity classes. For example, save() and persist() operations result in an SQL INSERT,
+        delete() in an SQL DELETE and update() or merge() in an SQL UPDATE.
+    -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <!-- Connection to the physical data source -->
+        <property name="dataSource" ref="dataSource"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate-dialect}</prop>
+                <prop key="hibernate.cache.provider_class">
+                    org.hibernate.cache.NoCacheProvider
+                </prop>
+                <prop key="hibernate.cache.use_second_level_cache">false</prop>
+                <prop key="hibernate.cache.use_query_cache">false</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="hibernateDataSource" class="org.openspaces.persistency.hibernate.StatelessHibernateExternalDataSource">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!--
+    http://wiki.gigaspaces.com/wiki/display/XAP9/Transaction+Management
+    http://static.springsource.org/spring/docs/2.5.x/reference/transaction.html#transaction-declarative
     -->
     <os-core:local-tx-manager id="transactionManager" space="space"/>
 
@@ -24,10 +58,26 @@
     <!--
 
     -->
-    <os-core:space id="space" url="/./events"/>
+    <os-core:space id="space" url="/./events" mirror="true" schema="persistent" external-data-source="hibernateDataSource">
+        <os-core:properties>
+            <props>
+                <prop key="space-config.engine.cache_policy">1</prop>
+                <prop key="space-config.external-data-source.usage">read-write</prop>
+                <prop key="cluster-config.cache-loader.external-data-source">true</prop>
+                <prop key="cluster-config.cache-loader.central-data-source">true</prop>
+                <prop key="cluster-config.mirror-service.url">
+                    jini://*/mirror_container/mirror?groups=practice
+                </prop>
+                <prop key="cluster-config.mirror-service.bulk-size">100</prop>
+                <prop key="cluster-config.mirror-service.interval-millis">2000</prop>
+                <prop key="cluster-config.mirror-service.interval-opers">100</prop>
+                <prop key="cluster-config.groups.group.repl-policy.repl-original-state">true</prop>
+            </props>
+        </os-core:properties>
+    </os-core:space>
 
     <!--
 
     -->
-    <os-core:giga-space id="gigaSpace" clustered="true" space="space" tx-manager="transactionManager" />
+    <os-core:giga-space id="gigaSpace" clustered="true" space="space" tx-manager="transactionManager"/>
 </beans>

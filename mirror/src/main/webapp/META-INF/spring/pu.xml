@@ -18,7 +18,7 @@
     <!--
         A factory for connections to the physical data source.
     -->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${data-source-driver}"/>
         <property name="url" value="${data-source-url}"/>
         <property name="username" value="${data-source-username}"/>
@@ -52,14 +52,8 @@
                 </prop>
                 <prop key="hibernate.cache.use_second_level_cache">false</prop>
                 <prop key="hibernate.cache.use_query_cache">false</prop>
-
-                <!--<prop key="hibernate.cache.provider_class">-->
-                <!--org.openspaces.hibernate.cache.SimpleMapCacheProvider-->
-                <!--</prop>-->
-                <!--<prop key="gigaspace.hibernate.cache.url">-->
-                <!--jini://*/*/events-->
-                <!--</prop>-->
-
+                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
+                <!--<prop key="hibernate.jdbc.batch_size">50</prop>-->
             </props>
         </property>
     </bean>
@@ -67,31 +61,17 @@
     <!--
         Data source configuration for Hibernate.
     -->
-    <bean id="hibernateDataSource" class="org.openspaces.persistency.hibernate.DefaultHibernateExternalDataSource">
+    <bean id="hibernateDataSource" class="org.openspaces.persistency.hibernate.StatelessHibernateExternalDataSource">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
     <os-core:space id="mirror" url="/./mirror" schema="mirror" external-data-source="hibernateDataSource">
         <os-core:properties>
             <props>
-                <!--<prop key="space-config.engine.cache_policy">1</prop>-->
-                <!--<prop key="space-config.external-data-source.usage">read-only</prop>-->
-                <!--<prop key="cluster-config.cache-loader.external-data-source">true</prop>-->
-                <!--<prop key="cluster-config.cache-loader.central-data-source">true</prop>-->
-                <prop key="cluster-config.mirror-service.url">
-                    jini://*/mirror_container1/mirror
-                </prop>
-                <!--<prop key="cluster-config.mirror-service.bulk-size">100</prop>-->
-                <!--<prop key="cluster-config.mirror-service.interval-millis">2000</prop>-->
-                <!--<prop key="cluster-config.mirror-service.interval-opers">100</prop>-->
-                <!--<prop key="cluster-config.groups.group.repl-policy.repl-original-state">true</prop>-->
-                <!--<prop key="space-config.engine:cache_policy">1</prop>-->
-                <!--<prop key="space-config.external-data-source.usage">read-write</prop>-->
-                <!--<prop key="cluster-config.cache-loader.external-data-source">true</prop>-->
-                <!--<prop key="cluster-config.cache-loader.central-data-source">true</prop>-->
-                <!--<prop key="space-config.mirror-service.cluster.name">events</prop>-->
-                <!--<prop key="space-config.mirror-service.cluster.partitions">1</prop>-->
-                <!--<prop key="space-config.mirror-service.cluster.backups-per-partition">0</prop>-->
+                <prop key="space-config.mirror-service.cluster.name">events</prop>
+                <prop key="space-config.mirror-service.cluster.partitions">1</prop>
+                <prop key="space-config.mirror-service.cluster.backups-per-partition">1</prop>
+                <prop key="space-config.mirror-service.operation-grouping">group-by-replication-bulk</prop>
             </props>
         </os-core:properties>
     </os-core:space>

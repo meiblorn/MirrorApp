@@ -4,9 +4,7 @@
 <!--TODO: Add comments -->
 <hibernate-mapping package="com.griddynamics.domain">
     <class name="Event" table="Events">
-        <id name="id" column="id" type="java.lang.Integer">
-            <generator class="native" />
-        </id>
-        <property name="message" column="message" type="java.lang.String" />
+        <id name="id" column="id" type="integer" />
+        <property name="message" column="message" type="string" />
     </class>
 </hibernate-mapping>
