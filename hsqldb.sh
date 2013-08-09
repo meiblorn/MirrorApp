@@ -1,6 +1,9 @@
 #!/bin/sh
 
-echo "Reading config...." >&2
-. "$(cd "$( dirname "$0" )" && pwd)"/environment.cfg
+# shell scripts directory
+DIR="$(cd "$( dirname "$0" )" && pwd)"
 
-java -cp $hsqldb_dir/lib/hsqldb.jar org.hsqldb.Server --props database/db.properties
+# include env configuration
+. $DIR/environment.cfg
+
+java -cp $hsqldb_dir/lib/hsqldb.jar org.hsqldb.Server --props $DIR/database/db.properties

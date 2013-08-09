@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# shell scripts directory
 DIR="$(cd "$( dirname "$0" )" && pwd)"
 
 # include env configuration
@@ -20,9 +21,9 @@ $gs_dir/bin/gs.sh deploy \
     -override-name mirror $DIR/mirror/target/MirrorApp-mirror.war
 
 # deploy service
-#$gs_dir/bin/gs.sh deploy \
-#    -cluster schema=partitioned-sync2backup total_members=1,1 \
-#    -max-instances-per-vm 4 \
-#    -max-instances-per-machine 4 \
-#    -deploy-timeout 1500 \
-#    -override-name service $DIR/service/target/MirrorApp-service.war
+$gs_dir/bin/gs.sh deploy \
+    -cluster schema=partitioned-sync2backup total_members=1,1 \
+    -max-instances-per-vm 4 \
+    -max-instances-per-machine 4 \
+    -deploy-timeout 1500 \
+    -override-name service $DIR/service/target/MirrorApp-service.war
