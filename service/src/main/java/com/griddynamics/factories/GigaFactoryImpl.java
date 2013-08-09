@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.ServletContextAware;
 
 import javax.servlet.ServletContext;
-import java.util.logging.Logger;
 
 /**
  * {@link GigaFactory} interface implementation. Provides <tt>GigaSpace</tt> instance throw servlet context.
@@ -19,7 +18,6 @@ import java.util.logging.Logger;
  */
 @Component
 public class GigaFactoryImpl implements GigaFactory, ServletContextAware {
-    Logger logger = Logger.getLogger(this.getClass().getName());
     private GigaSpace gigaSpace;
     private ServletContext servletContext;
 
