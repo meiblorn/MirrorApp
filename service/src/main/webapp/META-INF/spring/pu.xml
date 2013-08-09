@@ -12,7 +12,7 @@
     </bean>
 
 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${data-source-driver}"/>
         <property name="url" value="${data-source-url}"/>
         <property name="username" value="${data-source-username}"/>
