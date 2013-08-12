@@ -40,7 +40,7 @@
         </property>
     </bean>
 
-    <bean id="hibernateDataSource" class="org.openspaces.persistency.hibernate.StatelessHibernateExternalDataSource">
+    <bean id="hibernateDataSource" class="com.griddynamics.persistency.EventHibernateExternalDataSource">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
@@ -68,10 +68,10 @@
                 <prop key="cluster-config.mirror-service.url">
                     jini://*/mirror_container/mirror?groups=practice
                 </prop>
-                <prop key="cluster-config.mirror-service.bulk-size">100</prop>
-                <prop key="cluster-config.mirror-service.interval-millis">2000</prop>
-                <prop key="cluster-config.mirror-service.interval-opers">100</prop>
-                <prop key="cluster-config.groups.group.repl-policy.repl-original-state">true</prop>
+                <!--<prop key="cluster-config.mirror-service.bulk-size">100</prop>-->
+                <!--<prop key="cluster-config.mirror-service.interval-millis">2000</prop>-->
+                <!--<prop key="cluster-config.mirror-service.interval-opers">100</prop>-->
+                <!--<prop key="cluster-config.groups.group.repl-policy.repl-original-state">true</prop>-->
             </props>
         </os-core:properties>
     </os-core:space>
