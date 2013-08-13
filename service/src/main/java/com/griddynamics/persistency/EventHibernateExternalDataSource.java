@@ -9,19 +9,39 @@ import org.openspaces.persistency.hibernate.iterator.DefaultListQueryDataIterato
 import org.openspaces.persistency.hibernate.iterator.DefaultScrollableDataIterator;
 import org.springframework.beans.factory.annotation.Required;
 
+/**
+ *
+ * @since 1.0
+ */
 public class EventHibernateExternalDataSource extends DefaultHibernateExternalDataSource {
 
     private String hquery;
 
+    /**
+     * Returns the Hibernate Query string, which using in initial load process.
+     *
+     * @return the Hibernate Query.
+     */
     public String getHquery() {
         return hquery;
     }
 
+    /**
+     * Sets the Hibernate Query, which using in initial load process.
+     *
+     * @param hquery the Hibernate Query.
+     */
     @Required
     public void setHquery(String hquery) {
         this.hquery = hquery;
     }
 
+    /**
+     * Returns <tt>DataIterator</tt>, which performs the initial load operation.
+     *
+     * @return <tt>DataIterator</tt> instance.
+     * @throws DataSourceException thrown in case of an external data source failure.
+     */
     @Override
     public DataIterator initialLoad() throws DataSourceException {
 

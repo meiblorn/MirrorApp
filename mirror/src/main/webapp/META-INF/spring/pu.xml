@@ -12,7 +12,7 @@
         The default placeholder syntax: ${...}
     -->
     <bean id="propertiesConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:jdbc.properties"/>
+        <property name="location" value="classpath:jdbc.mysql.properties"/>
     </bean>
 
     <!--
@@ -33,17 +33,23 @@
     -->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 
-        <!-- Connection to the physical data source -->
+        <!--
+            Connection to the physical data source
+        -->
         <property name="dataSource" ref="dataSource"/>
 
-        <!--Mapping *.hbm.xml documents -->
+        <!--
+            Mapping *.hbm.xml documents
+        -->
         <property name="mappingResources">
             <list>
                 <value>com/griddynamics/domain/Event.hbm.xml</value>
             </list>
         </property>
 
-        <!-- Factory property that imitates hibernate.cfg file -->
+        <!--
+            Factory property that imitates hibernate.cfg file
+        -->
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">${hibernate-dialect}</prop>
@@ -52,19 +58,20 @@
                 </prop>
                 <prop key="hibernate.cache.use_second_level_cache">false</prop>
                 <prop key="hibernate.cache.use_query_cache">false</prop>
-                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
-                <!--<prop key="hibernate.jdbc.batch_size">50</prop>-->
             </props>
         </property>
     </bean>
 
     <!--
-        Data source configuration for Hibernate.
+        Data source configuration for Hibernate
     -->
     <bean id="hibernateDataSource" class="org.openspaces.persistency.hibernate.StatelessHibernateExternalDataSource">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+    <!--
+        Embedded IJSpace (or JavaSpace) component within the Spring ApplicationContext
+    -->
     <os-core:space id="mirror" url="/./mirror" schema="mirror" external-data-source="hibernateDataSource">
         <os-core:properties>
             <props>
@@ -75,5 +82,7 @@
             </props>
         </os-core:properties>
     </os-core:space>
+
+    <bean id="mirrorMonitor" class="com.griddynamics.monitor.MirrorMonitor" />
 
 </beans>

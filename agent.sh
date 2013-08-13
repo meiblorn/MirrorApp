@@ -5,8 +5,8 @@ DIR="$(cd "$( dirname "$0" )" && pwd)"
 # include env configuration
 . $DIR/environment.cfg
 
-export IDE_REMOTE_DEBUG="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8088"
-export GSC_JAVA_OPTIONS="-Duser.region=us -Duser.language=en $IDE_REMOTE_DEBUG"
+#export IDE_REMOTE_DEBUG="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8088"
+#export GSC_JAVA_OPTIONS="-Duser.region=us -Duser.language=en $IDE_REMOTE_DEBUG"
 
 # Lookup group
 export LOOKUPGROUPS="MirrorApp"
