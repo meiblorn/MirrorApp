@@ -43,7 +43,7 @@
         -->
         <property name="mappingResources">
             <list>
-                <value>com/griddynamics/domain/Event.hbm.xml</value>
+                <value>Event.hbm.xml</value>
             </list>
         </property>
 
