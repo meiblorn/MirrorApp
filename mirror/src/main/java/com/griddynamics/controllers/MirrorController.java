@@ -1,35 +1,35 @@
 package com.griddynamics.controllers;
 
+import com.griddynamics.monitor.MirrorMonitor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.ServletContextAware;
 
 import javax.servlet.ServletContext;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 /**
- *
- * URL: /operation
+ * URL: /
  *
  * @since 1.0
  */
 @Controller
-@RequestMapping(value = "operation", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class MirrorController implements ServletContextAware {
 
     ServletContext servletContext;
 
     @RequestMapping(value = "/status", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public String getStatus() throws SQLException {
-        DriverManagerDataSource dataSource =
-                (DriverManagerDataSource) servletContext.getAttribute("dataSource");
-        return null;
+    public String getStatus() {
+        MirrorMonitor spaceMonitor = (MirrorMonitor)
+                servletContext.getAttribute("mirrorMonitor");
+        return spaceMonitor.getStatus();
     }
 
     @Override

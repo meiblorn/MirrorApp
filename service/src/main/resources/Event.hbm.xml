@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--TODO: Add comments -->
+<hibernate-mapping package="com.griddynamics.domain">
+    <class name="Event" table="Events">
+        <id name="id" column="id" type="integer" />
+        <property name="message" column="message" type="string" />
+    </class>
+</hibernate-mapping>

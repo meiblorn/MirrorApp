@@ -7,12 +7,19 @@
        http://www.openspaces.org/schema/core http://www.openspaces.org/schema/9.0/core/openspaces-core.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <!--
+        PropertyPlaceholderConfigurer resolves placeholders in bean property values of context definitions.
+        It pulls values from a properties file into bean definitions.
+        The default placeholder syntax: ${...}
+    -->
     <bean id="propertiesConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:jdbc.properties"/>
+        <property name="location" value="classpath:jdbc.mysql.properties"/>
     </bean>
 
-
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+    <!--
+        A factory for connections to the physical data source.
+    -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${data-source-driver}"/>
         <property name="url" value="${data-source-url}"/>
         <property name="username" value="${data-source-username}"/>
@@ -26,8 +33,18 @@
         delete() in an SQL DELETE and update() or merge() in an SQL UPDATE.
     -->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+
         <!-- Connection to the physical data source -->
         <property name="dataSource" ref="dataSource"/>
+
+        <!--Mapping *.hbm.xml documents -->
+        <property name="mappingResources">
+            <list>
+                <value>Event.hbm.xml</value>
+            </list>
+        </property>
+
+        <!-- Factory property that imitates hibernate.cfg file -->
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">${hibernate-dialect}</prop>
@@ -40,23 +57,28 @@
         </property>
     </bean>
 
-    <bean id="hibernateDataSource" class="org.openspaces.persistency.hibernate.StatelessHibernateExternalDataSource">
+    <!--
+        Data source configuration for Hibernate.
+    -->
+    <bean id="hibernateDataSource" class="com.griddynamics.persistency.EventHibernateExternalDataSource">
         <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="hquery" value="from Event as event" />
     </bean>
 
     <!--
-    http://wiki.gigaspaces.com/wiki/display/XAP9/Transaction+Management
-    http://static.springsource.org/spring/docs/2.5.x/reference/transaction.html#transaction-declarative
+        Spring transaction manager using GigaSpaces LocalJiniTransactionManager.
+
+        Local transaction manager is high performance single space transaction manager, that
+        should be used in most if not all space related operations. Allows for most transaction
+        isolation levels excluding SERIALIZABLE (highest isolation level).
     -->
     <os-core:local-tx-manager id="transactionManager" space="space"/>
 
-    <!--
-
-    -->
+    <!-- Enable the configuration of transactional behavior based on annotations -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <!--
-
+        Embedded IJSpace (or JavaSpace) component within the Spring ApplicationContext
     -->
     <os-core:space id="space" url="/./events" mirror="true" schema="persistent" external-data-source="hibernateDataSource">
         <os-core:properties>
@@ -77,7 +99,7 @@
     </os-core:space>
 
     <!--
-
+        GigaSpace interface, providing simpler space API for IJSpace (JavaSpace) interaction.
     -->
     <os-core:giga-space id="gigaSpace" clustered="true" space="space" tx-manager="transactionManager"/>
 </beans>
