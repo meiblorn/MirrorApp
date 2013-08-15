@@ -13,7 +13,7 @@
         The default placeholder syntax: ${...}
     -->
     <bean id="propertiesConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:jdbc.mysql.properties"/>
+        <property name="location" value="classpath:jdbc.properties"/>
     </bean>
 
     <!--
