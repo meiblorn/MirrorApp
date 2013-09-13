@@ -3,8 +3,9 @@
 Deployment:<br>
 
 1. Edit environment.cfg to setup Gigaspaces XAP and HSQLDB directories.
-2. Run agent.sh script to startup Gigaspace agent with GSM, GSC and LUS. 
-3. Run in other terminal deploy.sh script to deploy MirrorApp project.
+2. Run hsqldb.sh script to run Database server. 
+3. Run agent.sh script to startup Gigaspace agent with GSM, GSC and LUS. 
+4. Run in other terminal deploy.sh script to deploy MirrorApp project.
 
 Usage:<br>
 
